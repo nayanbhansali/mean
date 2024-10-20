@@ -1,0 +1,23 @@
+// To display system details
+const os = require('os');
+console.log('OS Type:', os.type());
+console.log('OS Platform:', os.platform());
+console.log('OS Architecture:', os.arch());
+console.log('CPU Cores:', os.cpus().length);
+
+
+-----------------------------
+const fs = require('fs');
+fs.writeFileSync('hello.txt', 'Welcome students!')
+
+---------------------------------
+// To create a new server
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World!');
+}).listen(8080);
+
+--------------------------------------
+
+

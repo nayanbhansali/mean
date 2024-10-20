@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input { margin: 5px 0; padding: 10px; width: 200px; }
+        table { margin-top: 20px; width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body ng-controller="EmployeeController">
+    <h1>Employee Search</h1>
+    <input type="text" ng-model="nameQuery" placeholder="Search by name" ng-change="searchEmployee()">
+    <input type="text" ng-model="salaryQuery" placeholder="Search by salary" ng-change="searchEmployee()">
+
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Salary</th></tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="employee in filteredEmployees">
+                <td>{{employee.name}}</td><td>{{employee.salary}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p ng-if="!filteredEmployees.length">No results found</p>
+
+    <script>
+        angular.module('employeeApp', [])
+            .controller('EmployeeController', ['$scope', function($scope) {
+                $scope.employees = [
+                    { name: 'John Doe', salary: 50000 },
+                    { name: 'Jane Smith', salary: 60000 },
+                    { name: 'Emily Johnson', salary: 55000 },
+                    { name: 'Michael Brown', salary: 70000 },
+                    { name: 'Sarah Davis', salary: 45000 },
+                ];
+
+                $scope.filteredEmployees = $scope.employees;
+
+                $scope.searchEmployee = function() {
+                    $scope.filteredEmployees = $scope.employees.filter(employee =>
+                        (!($scope.nameQuery) || employee.name.toLowerCase().includes($scope.nameQuery.toLowerCase())) &&
+                        (!($scope.salaryQuery) || employee.salary.toString().includes($scope.salaryQuery))
+                    );
+                };
+            }]);
+    </script>
+</body>
+</html>

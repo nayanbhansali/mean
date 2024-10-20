@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="mathApp">
+
+<head>
+    <title>Factorial and Square Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        #calculator {
+            width: 300px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        button {
+            width: 48%;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body ng-controller="mathCtrl">
+
+    <div id="calculator">
+        <h2>Factorial and Square Calculator</h2>
+        <p>Calculate the square or factorial of a number:</p> <!-- Aim Description -->
+
+        <input type="number" ng-model="number" placeholder="Enter a number" required>
+
+        <div>
+            <button ng-click="calculateSquare()">Square</button>
+            <button ng-click="calculateFactorial()">Factorial</button>
+        </div>
+
+        <p id="result">Result: <strong>{{result}}</strong></p> <!-- Result Formatting -->
+    </div>
+
+    <script>
+        var app = angular.module('mathApp', []);
+
+        app.controller('mathCtrl', function ($scope) {
+            $scope.result = '';
+
+            // Function to calculate square
+            $scope.calculateSquare = function () {
+                if ($scope.number !== undefined) {
+                    $scope.result = $scope.number * $scope.number;
+                } else {
+                    $scope.result = 'Please enter a valid number.';
+                }
+            };
+
+            // Function to calculate factorial
+            $scope.calculateFactorial = function () {
+                if ($scope.number !== undefined) {
+                    $scope.result = factorial($scope.number);
+                } else {
+                    $scope.result = 'Please enter a valid number.';
+                }
+            };
+
+            // Recursive function to calculate factorial
+            function factorial(n) {
+                if (n < 0) return 'Invalid input';
+                return n <= 1 ? 1 : n * factorial(n - 1);
+            }
+        });
+    </script>
+</body>
+</html>
