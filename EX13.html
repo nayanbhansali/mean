@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function validateEmailInput() {
+            const emailInput = document.getElementById('emailInput').value;
+            const feedbackElement = document.getElementById('emailFeedBack');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Corrected the regex pattern
+            if (emailRegex.test(emailInput)) {
+                feedbackElement.textContent = ""; // Email is valid
+            } else {
+                feedbackElement.textContent = "Please enter a valid email address.";
+            }
+        }
+
+        function validatePasswordInput() {
+            const passwordInput = document.getElementById('passwordInput').value;
+            const passwordFeedbackElement = document.getElementById('passwordFeedBack');
+            if (passwordInput.length > 6) {
+                passwordFeedbackElement.textContent = ""; // Password length is valid
+            } else {
+                passwordFeedbackElement.textContent = "Password must be greater than 6 characters.";
+            }
+        }
+    </script>
+
+    <form id="registrationForm">
+        <label for="emailInput">Email:</label>
+        <input type="email" id="emailInput" oninput="validateEmailInput()">
+        <span id="emailFeedBack" style="color:red;"></span>
+        <br><br>
+
+        <label for="passwordInput">Password:</label>
+        <input type="password" id="passwordInput" oninput="validatePasswordInput()">
+        <span id="passwordFeedBack" style="color:red;"></span>
+    </form>
+</body>
+</html>
